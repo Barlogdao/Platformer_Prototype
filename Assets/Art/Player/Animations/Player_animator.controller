@@ -89,40 +89,40 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -7415693347947450398}
-    m_Position: {x: 200, y: 0, z: 0}
+    m_Position: {x: 340, y: -20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3745718542531426998}
-    m_Position: {x: 235, y: 65, z: 0}
+    m_Position: {x: 470, y: 60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3664058801043926773}
-    m_Position: {x: 270, y: 130, z: 0}
+    m_Position: {x: 270, y: 1000, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1746290352668050566}
-    m_Position: {x: 305, y: 195, z: 0}
+    m_Position: {x: 290, y: 880, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2654487418420601692}
-    m_Position: {x: 340, y: 260, z: 0}
+    m_Position: {x: 510, y: 990, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2257138964444384892}
-    m_Position: {x: 375, y: 325, z: 0}
+    m_Position: {x: 350, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2634809026983956669}
-    m_Position: {x: 410, y: 390, z: 0}
+    m_Position: {x: 410, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1958037805010197531}
-    m_Position: {x: 445, y: 455, z: 0}
+    m_Position: {x: 870, y: 780, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7766271900631427637}
-    m_Position: {x: 480, y: 520, z: 0}
+    m_Position: {x: 910, y: 850, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6377317002980561987}
-    m_Position: {x: 515, y: 585, z: 0}
+    m_Position: {x: 940, y: 910, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5582191135939417280}
-    m_Position: {x: 550, y: 650, z: 0}
+    m_Position: {x: 980, y: 980, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7043686631447901093}
-    m_Position: {x: 585, y: 715, z: 0}
+    m_Position: {x: 440, y: 670, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4206520778278459435}
     m_Position: {x: 620, y: 780, z: 0}
@@ -258,7 +258,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: crystal_mauler_free_v1.0
+  m_Name: Player_animator
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
