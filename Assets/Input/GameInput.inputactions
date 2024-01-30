@@ -1,8 +1,8 @@
 {
-    "name": "GameControls",
+    "name": "GameInput",
     "maps": [
         {
-            "name": "Gameplay",
+            "name": "Player",
             "id": "6e4970f4-8e61-4822-bbff-522a2848e005",
             "actions": [
                 {

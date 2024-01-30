@@ -1,47 +1,48 @@
 using UnityEngine;
-using GameInput;
 using UnityEngine.InputSystem;
-using System;
+using Controls.Input;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _speed = 2f;
     [SerializeField] private float _jumpForce = 2f;
+    [SerializeField] ObstacleChecker _groundChecker;
 
-    private GameControls _gameControls;
+    private GameInput _input;
     private Rigidbody2D _rigidbody2D;
-    private float _velocity;
+    private PlayerView _view;
+    private float _horizontalInput;
 
-    private void Awake()
+    public bool IsGrounded => _groundChecker.IsTouches;
+
+    public void Initialize(GameInput input, PlayerView view)
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _gameControls = new GameControls();
-    }
-
-    private void OnEnable()
-    {
-        _gameControls.Enable();
-        _gameControls.Gameplay.Jump.performed += OnJump;
+        _input = input;
+        _view = view;
+        _input.Player.Jump.performed += OnJump;
     }
 
     private void Update()
     {
-        _velocity = _gameControls.Gameplay.Move.ReadValue<float>();
+        _horizontalInput = _input.Player.Move.ReadValue<float>();
+        _view.SetHorizontalSpeed(_horizontalInput);
     }
 
     private void FixedUpdate()
     {
-        _rigidbody2D.velocity = new Vector2 ( _velocity * _speed, _rigidbody2D.velocity.y);
+        _rigidbody2D.velocity = new Vector2 ( _horizontalInput * _speed, _rigidbody2D.velocity.y);
+        _view.SetVerticalSpeed(_rigidbody2D.velocity.y);
+        _view.GroundCheck(IsGrounded);
     }
 
     private void OnJump(InputAction.CallbackContext obj)
     {
         _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
     }
-
-    private void OnDisable()
+    private void OnDestroy()
     {
-        _gameControls.Disable();
+        _input.Player.Jump.performed -= OnJump;
     }
 }
