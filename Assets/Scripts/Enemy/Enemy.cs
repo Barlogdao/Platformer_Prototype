@@ -1,44 +1,44 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
 {
-    private const string HorizontalSpeed = "HorizontalSpeed";
-
     [SerializeField] private float _speed;
-    [SerializeField] BoxCollider2D _boxCollider;
-    [SerializeField] ObstacleChecker _obstacleChecker;
+    [SerializeField] private EnemyView _view;
+    [SerializeField] private ObstacleDetector _obstacleDetector;
+    [SerializeField] private PlatformEndDetector _platformEndDetector;
 
-    private Animator _animator;
-    private Rigidbody2D _rigidbody2D;
-
+    private EnemyStateMachine _stateMachine;
     private Vector2 _direction;
+
+    public bool ObstacleDetected => _obstacleDetector.IsDetected;
+    public bool PlatformEndDetected => _platformEndDetector.IsDetected;
+    public EnemyView View => _view;
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _view.Initialize();
         _direction = transform.right;
+
+        _stateMachine = new EnemyStateMachine(this);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        _rigidbody2D.velocity = new Vector2(_direction.x * _speed,_rigidbody2D.velocity.y);
-        _animator.SetFloat(HorizontalSpeed, Mathf.Abs(_direction.x));
-
-        if (_obstacleChecker.IsTouches)
-        {
-            ChangeDirection();
-        }
+        _stateMachine.Update();
     }
 
-    private void ChangeDirection()
+    public void Move()
+    {
+        Vector2 translation = _direction * _speed * Time.deltaTime;
+
+        transform.Translate(translation);
+    }
+
+    public void ChangeDirection()
     {
         Vector2 changedScale = new Vector2(-transform.localScale.x, transform.localScale.y);
 
         transform.localScale = changedScale;
-        _direction = -_direction;         
+        _direction = -_direction;
     }
 }

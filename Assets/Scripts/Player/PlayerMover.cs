@@ -1,48 +1,38 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using Controls.Input;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _speed = 2f;
     [SerializeField] private float _jumpForce = 2f;
-    [SerializeField] ObstacleChecker _groundChecker;
 
-    private GameInput _input;
     private Rigidbody2D _rigidbody2D;
-    private PlayerView _view;
-    private float _horizontalInput;
 
-    public bool IsGrounded => _groundChecker.IsTouches;
+    public float VerticalVelocity => _rigidbody2D.velocity.y;
 
-    public void Initialize(GameInput input, PlayerView view)
+    public void Initialize()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _input = input;
-        _view = view;
-        _input.Player.Jump.performed += OnJump;
     }
 
-    private void Update()
-    {
-        _horizontalInput = _input.Player.Move.ReadValue<float>();
-        _view.SetHorizontalSpeed(_horizontalInput);
-    }
-
-    private void FixedUpdate()
-    {
-        _rigidbody2D.velocity = new Vector2 ( _horizontalInput * _speed, _rigidbody2D.velocity.y);
-        _view.SetVerticalSpeed(_rigidbody2D.velocity.y);
-        _view.GroundCheck(IsGrounded);
-    }
-
-    private void OnJump(InputAction.CallbackContext obj)
+    public void Jump()
     {
         _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
     }
-    private void OnDestroy()
+
+    public void Move(float horizontalInputValue)
     {
-        _input.Player.Jump.performed -= OnJump;
+        float horizontalTranslation = horizontalInputValue * _speed * Time.deltaTime;
+        Vector2 translation = new Vector2(horizontalTranslation, 0f);
+
+        transform.Translate(translation);
+        CheckDirection(horizontalInputValue);
+    }
+
+    private void CheckDirection(float horizontalInputValue)
+    {
+        Vector2 scale = horizontalInputValue < 0 ? new Vector2(-1f, 1f) : Vector2.one;
+
+        transform.localScale = scale;
     }
 }

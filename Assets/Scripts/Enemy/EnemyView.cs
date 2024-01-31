@@ -1,14 +1,12 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
-public class PlayerView : MonoBehaviour
+[RequireComponent(typeof(Animator))]
+public class EnemyView : MonoBehaviour
 {
     private static readonly int s_idle = Animator.StringToHash("Idle");
     private static readonly int s_run = Animator.StringToHash("Run");
-    private static readonly int s_jump = Animator.StringToHash("Jump");
-    private static readonly int s_fall = Animator.StringToHash("Fall");
-
+    
     private Animator _animator;
 
     public void Initialize()
@@ -26,13 +24,4 @@ public class PlayerView : MonoBehaviour
         _animator.Play(s_run);
     }
 
-    public void StartJump()
-    {
-        _animator.Play(s_jump);
-    }
-
-    public void StartFall()
-    {
-        _animator.Play(s_fall);
-    }
 }
