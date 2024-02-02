@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent (typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _speed;
@@ -8,6 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private PlatformEndDetector _platformEndDetector;
 
     private EnemyStateMachine _stateMachine;
+    private Rigidbody2D _rigidbody2D;
     private Vector2 _direction;
 
     public bool ObstacleDetected => _obstacleDetector.IsDetected;
@@ -16,6 +18,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         _view.Initialize();
         _direction = transform.right;
 
@@ -27,18 +30,23 @@ public class Enemy : MonoBehaviour
         _stateMachine.Update();
     }
 
+    private void FixedUpdate()
+    {
+        _stateMachine.FixedUpdate();
+    }
+
     public void Move()
     {
-        Vector2 translation = _direction * _speed * Time.deltaTime;
+        Vector3 translation = _direction * _speed * Time.deltaTime;
 
-        transform.Translate(translation);
+        _rigidbody2D.MovePosition(transform.position + translation);
     }
 
     public void ChangeDirection()
     {
-        Vector2 changedScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+        Vector2 scale = new Vector2(-transform.localScale.x, transform.localScale.y);
 
-        transform.localScale = changedScale;
+        transform.localScale = scale;
         _direction = -_direction;
     }
 }

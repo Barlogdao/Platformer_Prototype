@@ -32,4 +32,9 @@ public class EnemyStateMachine : IStateSwitcher
     {
         _currentState.Update();
     }
+
+    public void FixedUpdate()
+    {
+        _currentState.FixedUpdate();
+    }
 }

@@ -5,7 +5,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerMover _mover;
     [SerializeField] private PlayerView _view;
-    [SerializeField] ObstacleDetector _groundDetector;
+    [SerializeField] private ObstacleDetector _groundDetector;
 
     private GameInput _input;
     private PlayerStateMachine _stateMachine;
@@ -27,6 +27,11 @@ public class Player : MonoBehaviour
     private void Update()
     {
         _stateMachine.Update();
+    }
+
+    private void FixedUpdate()
+    {
+        _stateMachine.FixedUpdate();
     }
 
     private void OnEnable()

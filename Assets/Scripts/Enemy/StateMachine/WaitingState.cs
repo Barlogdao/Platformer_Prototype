@@ -36,17 +36,12 @@ namespace EnemyStates
             
             if (_elapsedTime >= _waitDuration) 
             {
-                TryChangeDirection();
                 _stateSwitcher.SwitchState<PatrolingState>();
             }
         }
-
-        private void TryChangeDirection()
+        public void FixedUpdate()
         {
-            if (_enemy.ObstacleDetected || _enemy.PlatformEndDetected)
-            {
-                _enemy.ChangeDirection();
-            }
+
         }
     }
 }

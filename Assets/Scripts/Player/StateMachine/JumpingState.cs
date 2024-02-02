@@ -2,11 +2,8 @@ namespace PlayerState
 {
     public class JumpingState : AirbornState
     {
-        public JumpingState(IStateSwitcher stateSwitcher, Player player) : base(stateSwitcher, player)
-        {
-            
-        }
-
+        public JumpingState(IStateSwitcher stateSwitcher, Player player) : base(stateSwitcher, player) { }
+ 
         public override void Enter()
         {
             base.Enter();
@@ -19,7 +16,7 @@ namespace PlayerState
         {
             base.Update();
 
-            if(Mover.VerticalVelocity <= 0)
+            if (Mover.VerticalVelocity <= 0)
             {
                 StateSwitcher.SwitchState<FallingState>();
             }

@@ -13,23 +13,33 @@ namespace EnemyStates
             _stateSwitcher = stateSwitcher;
         }
 
+        private bool IsNeedChangeDirection => _enemy.ObstacleDetected || _enemy.PlatformEndDetected;
+
         public void Enter()
         {
+            TryChangeDirection();
            _view.StartRun();
         }
 
-        public void Exit()
-        {
-            
-        }
+        public void Exit() { }   
 
         public void Update()
         {
-            _enemy.Move();
-
-            if (_enemy.ObstacleDetected || _enemy.PlatformEndDetected)
+            if (IsNeedChangeDirection == true)
             {
                 _stateSwitcher.SwitchState<WaitingState>();
+            }
+        }
+        public void FixedUpdate()
+        {
+            _enemy.Move();
+        }
+
+        private void TryChangeDirection()
+        {
+            if (IsNeedChangeDirection == true)
+            {
+                _enemy.ChangeDirection();
             }
         }
     }

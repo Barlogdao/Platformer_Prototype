@@ -1,9 +1,6 @@
-
 using PlayerState;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class PlayerStateMachine : IStateSwitcher
 {
@@ -33,8 +30,6 @@ public class PlayerStateMachine : IStateSwitcher
         _currentState.Enter();
     }
 
-    public void Update()
-    {
-        _currentState.Update();
-    }
+    public void Update() => _currentState.Update();
+    public void FixedUpdate() => _currentState.FixedUpdate();
 }

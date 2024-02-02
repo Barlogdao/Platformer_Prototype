@@ -7,12 +7,14 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float _jumpForce = 2f;
 
     private Rigidbody2D _rigidbody2D;
+    private Vector2 _originScale;
 
     public float VerticalVelocity => _rigidbody2D.velocity.y;
 
     public void Initialize()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _originScale = transform.localScale;
     }
 
     public void Jump()
@@ -20,19 +22,35 @@ public class PlayerMover : MonoBehaviour
         _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
     }
 
-    public void Move(float horizontalInputValue)
+    public void Move(float horizontalInput)
     {
-        float horizontalTranslation = horizontalInputValue * _speed * Time.deltaTime;
-        Vector2 translation = new Vector2(horizontalTranslation, 0f);
+        CheckDirection(horizontalInput);
 
-        transform.Translate(translation);
-        CheckDirection(horizontalInputValue);
+        float horizontalVelocity = horizontalInput * _speed;
+        Vector2 velocity = new Vector2(horizontalVelocity, VerticalVelocity);
+
+        _rigidbody2D.velocity = velocity;
     }
 
-    private void CheckDirection(float horizontalInputValue)
+    private void CheckDirection(float horizontalInput)
     {
-        Vector2 scale = horizontalInputValue < 0 ? new Vector2(-1f, 1f) : Vector2.one;
+        if (horizontalInput < 0)
+        {
+            TurnLeft();
+        }
+        else if (horizontalInput > 0)
+        {
+            TurnRight();
+        }
+    }
 
-        transform.localScale = scale;
+    private void TurnLeft()
+    {
+        transform.localScale = new Vector2(-_originScale.x, _originScale.y);
+    }
+
+    private void TurnRight()
+    {
+        transform.localScale = _originScale;
     }
 }

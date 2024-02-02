@@ -2,7 +2,8 @@ namespace PlayerState
 {
     public class FallingState : AirbornState
     {
-        private ObstacleDetector _groundDetector;
+        private readonly ObstacleDetector _groundDetector;
+
         public FallingState(IStateSwitcher stateSwitcher, Player player) : base(stateSwitcher, player)
         {
             _groundDetector = Player.GroundDetector;
