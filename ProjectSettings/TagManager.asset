@@ -13,9 +13,9 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - 
-  - 
-  - 
+  - Pickable
+  - Picker
+  - Interactable
   - 
   - 
   - 
@@ -43,4 +43,7 @@ TagManager:
     locked: 0
   - name: Characters
     uniqueID: 3201239765
+    locked: 0
+  - name: Collectibles
+    uniqueID: 322063145
     locked: 0
