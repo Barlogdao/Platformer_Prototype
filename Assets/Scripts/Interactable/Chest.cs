@@ -47,7 +47,7 @@ public class Chest : Interactable
 
     private IEnumerator SpawnCoins()
     {
-        WaitForSeconds cooldown = new WaitForSeconds (_spawnCooldown);
+        WaitForSeconds spawnCooldown = new WaitForSeconds (_spawnCooldown);
 
         for (int i = 0; i < _coinAmount; i++)
         {
@@ -55,7 +55,7 @@ public class Chest : Interactable
 
             coin.AddForce(GetCoinVelocity());
 
-            yield return cooldown;
+            yield return spawnCooldown;
         }
     }
 

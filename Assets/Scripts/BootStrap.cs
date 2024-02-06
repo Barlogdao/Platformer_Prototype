@@ -22,9 +22,11 @@ public class BootStrap : MonoBehaviour
         _player.Initialize(_playerConfig);
 
         _coinPull = new CoinPull(_coinPrefab, _coinContainer);
+
         InitCoins();
         InitChests();
     }
+
     private void InitCoins()
     {
         foreach (Transform point in _coinPoints)

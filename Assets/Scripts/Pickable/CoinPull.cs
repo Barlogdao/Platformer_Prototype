@@ -3,10 +3,10 @@ using UnityEngine.Pool;
 
 public class CoinPull
 {
-    private ObjectPool<Coin> _pull;
+    private readonly ObjectPool<Coin> _pull;
     
-    private Coin _prefab;
-    private int _defaultCapacity;
+    private readonly Coin _prefab;
+    private readonly int _defaultCapacity;
     private readonly Transform _parent;
 
     public CoinPull(Coin prefab, Transform parent)
