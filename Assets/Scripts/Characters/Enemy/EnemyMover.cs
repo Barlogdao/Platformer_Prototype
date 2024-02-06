@@ -22,7 +22,7 @@ public class EnemyMover : MonoBehaviour
 
     public void Move()
     {
-        Vector3 translation = _direction * _speed * Time.deltaTime;
+        Vector3 translation = _speed * Time.deltaTime * _direction;
 
         _rigidbody2D.MovePosition(transform.position + translation);
     }

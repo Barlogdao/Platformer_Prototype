@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class PlatformEndDetector : MonoBehaviour
 {
-    private Transform _transform;
-
-    [SerializeField] private LayerMask _platform;
+    [SerializeField] private LayerMask _platformMask;
     [SerializeField, Range(0.1f,1f)] private float _detectDistance;
 
     private RaycastHit2D[] _hits = new RaycastHit2D[1];

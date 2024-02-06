@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 799d75a18a70be043ab3ec3150f44ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _obstacle:
+  _obstacleMask:
     serializedVersion: 2
     m_Bits: 8
   _boxSize: {x: 0.64, y: 0.22}

@@ -19,8 +19,8 @@ namespace EnemyStates
 
         public void Enter()
         {
-            _view.StartIdle();
             _elapsedTime = 0f;
+            _view.StartIdle();
         }
 
         public void Exit() { }

@@ -6,18 +6,23 @@ public class Chest : Interactable
 {
     private const string OpenChest = nameof(OpenChest);
 
-    [SerializeField] private Coin _coinPrefab;
     [SerializeField] private int _coinAmount;
     [SerializeField] private float _spawnCooldown;
     [SerializeField, Min(1)] private float _verticalSpawnForce;
     [SerializeField] ParticleSystem _particles;
 
     private Animator _animator;
+    private CoinPull _coinPull;
 
     protected override void OnAwake()
     {
         base.OnAwake();
         _animator = GetComponent<Animator>();
+    }
+
+    public void Initialize(CoinPull coinPull)
+    {
+        _coinPull = coinPull;
     }
 
     protected override void OnInteract()
@@ -46,8 +51,9 @@ public class Chest : Interactable
 
         for (int i = 0; i < _coinAmount; i++)
         {
-            Coin coin = Instantiate(_coinPrefab, transform.position, Quaternion.identity);
-            coin.Push(GetCoinVelocity());
+            Coin coin = _coinPull.Get(transform.position);
+
+            coin.AddForce(GetCoinVelocity());
 
             yield return cooldown;
         }

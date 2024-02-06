@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 799d75a18a70be043ab3ec3150f44ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _obstacle:
+  _obstacleMask:
     serializedVersion: 2
     m_Bits: 8
   _boxSize: {x: 0.22, y: 1.12}
@@ -98,10 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7043e7916c3e6d4098d4fc07f2e2b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2
   _view: {fileID: 7320509471000081990}
-  _obstacleDetector: {fileID: 2123668924872367590}
-  _platformEndDetector: {fileID: 4285097174697915246}
   _mover: {fileID: 9018019145455780133}
 --- !u!61 &3133794877809159760
 BoxCollider2D:
@@ -234,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3fff1e7951f14a47bf0f4eee07af66e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _platform:
+  _platformMask:
     serializedVersion: 2
     m_Bits: 8
   _detectDistance: 0.321

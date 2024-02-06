@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _coinPrefab: {fileID: 7810899511625140884, guid: cf2390011f7297d4e9a25e31828fd9ab, type: 3}
   _coinAmount: 20
-  _spawnCooldown: 0.1
+  _spawnCooldown: 0.04
   _verticalSpawnForce: 8
   _particles: {fileID: 1483167897877034817}
 --- !u!212 &656420796679850879
@@ -138,7 +138,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5330448}
+  m_Offset: {x: -0.054722786, y: 0.5330448}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -149,7 +149,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.2739906, y: 2.020322}
+  m_Size: {x: 5.3828516, y: 2.020322}
   m_EdgeRadius: 0
 --- !u!95 &7093059008768551580
 Animator:
@@ -890,7 +890,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.66
+      value: 0.4934306
       mode: 0
       spread: 0
       speed:

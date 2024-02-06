@@ -8,15 +8,17 @@ public class Coin : MonoBehaviour, IPickable
     [SerializeField, Min(0.1f)] private float _pickSpeed = 4f;
 
     private Rigidbody2D _rigidbody;
+    private CoinPull _pull;
 
     public int Value => _value;
 
-    private void Awake()
+    public void Initialize(CoinPull pull)
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _pull = pull;
     }
 
-    public void Push(Vector2 velocity)
+    public void AddForce(Vector2 velocity)
     {
         _rigidbody.AddForce(velocity, ForceMode2D.Impulse);
     }
@@ -30,13 +32,21 @@ public class Coin : MonoBehaviour, IPickable
     {
         _rigidbody.isKinematic = true;
         _rigidbody.velocity = Vector2.zero;
-        
+
         while (transform.position != picker.position)
         {
             transform.position = Vector2.MoveTowards(transform.position, picker.position, _pickSpeed * Time.deltaTime);
+
             yield return null;
         }
 
-        Destroy(gameObject);
+        _rigidbody.isKinematic = false;
+
+        Release();
+    }
+
+    private void Release()
+    {
+        _pull.Release(this);
     }
 }
