@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour, IInteractor
+public class Player : MonoBehaviour, IInteractor, IDamagable
 {
     [SerializeField] private PlayerMover _mover;
     [SerializeField] private PlayerView _view;
@@ -14,6 +14,9 @@ public class Player : MonoBehaviour, IInteractor
     private GameInput _input;
     private StateMachine _stateMachine;
     private Wallet _wallet;
+    private Health _health;
+
+    public bool IsAlive => _health.IsPositive;
 
     public event Action Interacted;
 
@@ -21,6 +24,7 @@ public class Player : MonoBehaviour, IInteractor
     {
         _input = new GameInput();
         _wallet = new Wallet(config.StartMoney);
+        _health = new Health(config.Health);
 
         _view.Initialize();
         _mover.Initialize();
@@ -49,6 +53,11 @@ public class Player : MonoBehaviour, IInteractor
         _input.Disable();
         _input.Player.Interact.performed -= OnInteractPressed;
         _picker.Picked -= OnPick;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _health.Subtract(damage);
     }
 
     private void StateMachineInit()
