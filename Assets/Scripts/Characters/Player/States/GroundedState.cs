@@ -4,31 +4,28 @@ namespace PlayerState
 {
     public class GroundedState : MovementState
     {
-        private readonly ObstacleDetector _groundDetector;
-
-        public GroundedState(IStateSwitcher stateSwitcher, PlayerComponents playerComponents) : base(stateSwitcher, playerComponents)
-        {
-            _groundDetector = playerComponents.GroundDetector;
-        }
+        public GroundedState(IStateSwitcher stateSwitcher, PlayerComponents playerComponents) : base(stateSwitcher, playerComponents) { }
 
         public override void Enter()
         {
             base.Enter();
 
             Input.Player.Jump.performed += OnJumpPressed;
+            Input.Player.Attack.performed += OnAttackPressed;
         }
 
         public override void Exit()
         {
             base.Exit();
             Input.Player.Jump.performed -= OnJumpPressed;
+            Input.Player.Attack.performed -= OnAttackPressed;
         }
 
         public override void Update()
         {
             base.Update();
 
-            if (_groundDetector.IsDetected == false)
+            if (IsGrounded == false)
             {
                 StateSwitcher.SwitchState<FallingState>();
             }
@@ -36,7 +33,12 @@ namespace PlayerState
 
         private void OnJumpPressed(InputAction.CallbackContext context)
         {
-           StateSwitcher.SwitchState<JumpingState>();
+            StateSwitcher.SwitchState<JumpingState>();
+        }
+
+        private void OnAttackPressed(InputAction.CallbackContext context)
+        {
+            StateSwitcher.SwitchState<AttackState>();
         }
     }
 }

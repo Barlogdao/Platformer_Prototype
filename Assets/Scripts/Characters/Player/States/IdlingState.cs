@@ -2,18 +2,13 @@ namespace PlayerState
 {
     public class IdlingState : GroundedState
     {
-        private readonly PlayerView _view;
-
-        public IdlingState(IStateSwitcher stateSwitcher, PlayerComponents playerComponents) : base(stateSwitcher, playerComponents)
-        {
-            _view = playerComponents.View;
-        }
+        public IdlingState(IStateSwitcher stateSwitcher, PlayerComponents playerComponents) : base(stateSwitcher, playerComponents) { }
 
         public override void Enter()
         {
             base.Enter();
 
-            _view.StartIdle();
+            View.StartIdle();
         }
 
         public override void Update()

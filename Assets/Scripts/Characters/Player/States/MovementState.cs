@@ -1,34 +1,18 @@
-using Controls.Input;
-
 namespace PlayerState
 {
-    public abstract class MovementState : IState
+    public abstract class MovementState : BaseState
     {
-        protected readonly IStateSwitcher StateSwitcher;
         protected readonly PlayerMover Mover;
-        protected readonly GameInput Input;
 
-        protected MovementState(IStateSwitcher stateSwitcher, PlayerComponents playerComponents)
+        protected MovementState(IStateSwitcher stateSwitcher, PlayerComponents playerComponents):base(stateSwitcher, playerComponents)    
         {
-            StateSwitcher = stateSwitcher;
             Mover = playerComponents.Mover;
-            Input = playerComponents.Input;
         }
 
-        protected float HorizontalInput { get; private set; }
-        protected bool IsHorizontInputZero => HorizontalInput == 0;
-
-        public virtual void Enter() { }
-
-        public virtual void Exit() { }
-
-        public virtual void Update()
+        public override void FixedUpdate()
         {
-            HorizontalInput = Input.Player.Move.ReadValue<float>();
-        }
+            base.FixedUpdate();
 
-        public virtual void FixedUpdate()
-        {
             Mover.Move(HorizontalInput);
         }
     }

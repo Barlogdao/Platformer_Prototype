@@ -30,6 +30,12 @@ public class PlayerMover : MonoBehaviour
         _rigidbody2D.velocity = velocity;
     }
 
+    public void StopMove()
+    {
+        float horizontalVelocity = 0;
+        Move(horizontalVelocity);
+    }
+
     private void CheckDirection(float horizontalInput)
     {
         if (horizontalInput < 0)

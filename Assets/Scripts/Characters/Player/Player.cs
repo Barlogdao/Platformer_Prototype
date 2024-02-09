@@ -4,19 +4,19 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour, IInteractor, IDamagable
+public class Player : MonoBehaviour, IInteractor
 {
     [SerializeField] private PlayerMover _mover;
     [SerializeField] private PlayerView _view;
+    [SerializeField] private PlayerHealth _health;
+    [SerializeField] private PlayerAnimatorEvents _animatorEvents;
+    [SerializeField] private Attacker _attacker;
     [SerializeField] private ObstacleDetector _groundDetector;
     [SerializeField] private PlayerPicker _picker;
 
     private GameInput _input;
     private StateMachine _stateMachine;
     private Wallet _wallet;
-    private Health _health;
-
-    public bool IsAlive => _health.IsPositive;
 
     public event Action Interacted;
 
@@ -24,10 +24,11 @@ public class Player : MonoBehaviour, IInteractor, IDamagable
     {
         _input = new GameInput();
         _wallet = new Wallet(config.StartMoney);
-        _health = new Health(config.Health);
 
         _view.Initialize();
         _mover.Initialize();
+        _health.Initialize(config.Health);
+        _attacker.Initialize(config.Damage);
         StateMachineInit();
     }
 
@@ -55,20 +56,19 @@ public class Player : MonoBehaviour, IInteractor, IDamagable
         _picker.Picked -= OnPick;
     }
 
-    public void TakeDamage(int damage)
-    {
-        _health.Subtract(damage);
-    }
-
     private void StateMachineInit()
     {
-        PlayerComponents playerComponents = new PlayerComponents(_view, _mover, _input, _groundDetector);
+        PlayerComponents playerComponents = new PlayerComponents(_view, _mover, _input, _groundDetector,_animatorEvents, _health);
         _stateMachine = new StateMachine();
 
         _stateMachine.AddState(new IdlingState(_stateMachine, playerComponents));
         _stateMachine.AddState(new RunningState(_stateMachine, playerComponents));
         _stateMachine.AddState(new JumpingState(_stateMachine, playerComponents));
         _stateMachine.AddState(new FallingState(_stateMachine, playerComponents));
+        _stateMachine.AddState(new AttackState(_stateMachine, playerComponents));
+        _stateMachine.AddState(new HitState(_stateMachine, playerComponents));
+        _stateMachine.AddState(new ReturnState(_stateMachine, playerComponents));
+        _stateMachine.AddState(new DeadState(_view, _mover));
 
         _stateMachine.SwitchState<IdlingState>();
     }

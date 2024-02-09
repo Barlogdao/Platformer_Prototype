@@ -2,18 +2,13 @@ namespace PlayerState
 {
     public class RunningState : GroundedState
     {
-        private readonly PlayerView _view;
-
-        public RunningState(IStateSwitcher stateSwitcher, PlayerComponents playerComponents) : base(stateSwitcher, playerComponents)
-        {
-            _view = playerComponents.View;
-        }
+        public RunningState(IStateSwitcher stateSwitcher, PlayerComponents playerComponents) : base(stateSwitcher, playerComponents) { }
 
         public override void Enter()
         {
             base.Enter();
 
-            _view.StartRun();
+            View.StartRun();
         }
 
         public override void Update()

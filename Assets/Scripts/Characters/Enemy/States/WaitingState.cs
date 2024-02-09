@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace EnemyStates
 {
-    public class WaitingState : IState
+    public class WaitingState : EnemyBaseState
     {
         private readonly EnemyView _view;
         private readonly IStateSwitcher _stateSwitcher;
@@ -10,23 +10,25 @@ namespace EnemyStates
 
         private float _elapsedTime;
 
-        public WaitingState(EnemyView view, IStateSwitcher stateSwitcher)
+        public WaitingState(IStateSwitcher stateSwitcher, EnemyView view, EnemyMover mover, Attacker attacker, IDamagable damagable) : base(stateSwitcher, view, mover, attacker, damagable)
         {
             _view = view;
             _stateSwitcher = stateSwitcher;
             _waitDuration = 1f;
         }
 
-        public void Enter()
+        public override void Enter()
         {
+            base.Enter();
+
             _elapsedTime = 0f;
             _view.StartIdle();
         }
 
-        public void Exit() { }
-
-        public void Update()
+        public override void Update()
         {
+            base.Update(); 
+
             _elapsedTime += Time.deltaTime;
             
             if (_elapsedTime >= _waitDuration) 
@@ -34,6 +36,5 @@ namespace EnemyStates
                 _stateSwitcher.SwitchState<PatrolingState>();
             }
         }
-        public void FixedUpdate() { }
     }
 }

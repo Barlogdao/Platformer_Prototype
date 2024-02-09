@@ -1,41 +1,46 @@
 namespace EnemyStates
 {
-    public class PatrolingState : IState
+    public class PatrolingState : EnemyBaseState
     {
         private readonly EnemyView _view;
         private readonly EnemyMover _mover;
         private readonly IStateSwitcher _stateSwitcher;
         
-        public PatrolingState(EnemyView view, EnemyMover mover, IStateSwitcher stateSwitcher)
+        public PatrolingState(IStateSwitcher stateSwitcher, EnemyView view, EnemyMover mover, Attacker attacker, IDamagable damagable):base (stateSwitcher,view,mover,attacker,damagable)
         {
             _view = view;
             _mover = mover;
             _stateSwitcher = stateSwitcher;
         }
 
-        public void Enter()
+        public override void Enter()
         {
+            base.Enter ();
             TryChangeDirection();
            _view.StartRun();
         }
 
-        public void Exit() { }   
 
-        public void Update()
+        public override void Update()
         {
+            base .Update ();
+
             if (_mover.IsNeedChangeDirection == true)
             {
                 _stateSwitcher.SwitchState<WaitingState>();
             }
+
         }
 
-        public void FixedUpdate()
+        public override void FixedUpdate()
         {
+            base .FixedUpdate ();
             _mover.Move();
         }
 
         private void TryChangeDirection()
         {
+
             if (_mover.IsNeedChangeDirection == true)
             {
                 _mover.ChangeDirection();
