@@ -1,9 +1,10 @@
 using UnityEngine;
 
-[RequireComponent (typeof(BoxCollider2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class Attacker : MonoBehaviour
 {
     [SerializeField] private LayerMask _targetLayer;
+
     private int _damage;
     private BoxCollider2D _boxCollider;
 

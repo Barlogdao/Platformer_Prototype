@@ -58,9 +58,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6146241442967508487}
   - component: {fileID: 7407787793986709566}
+  - component: {fileID: 9018019145455780133}
   - component: {fileID: 3133794877809159760}
   - component: {fileID: 8212434279368472558}
-  - component: {fileID: 9018019145455780133}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -83,6 +83,7 @@ Transform:
   m_Children:
   - {fileID: 3882770881271156254}
   - {fileID: 5525676447692672806}
+  - {fileID: 7667060883796680135}
   - {fileID: 512185167712516634}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102,6 +103,22 @@ MonoBehaviour:
   _mover: {fileID: 9018019145455780133}
   _attacker: {fileID: 3864242798779621963}
   _animatorEvents: {fileID: 5716645947185619619}
+--- !u!114 &9018019145455780133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511158967935274362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f350ce5c7de28ea47b334e55d3750cb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 2
+  _obstacleDetector: {fileID: 2123668924872367590}
+  _platformEndDetector: {fileID: 4285097174697915246}
+  _targetDetector: {fileID: 1335248487995659429}
 --- !u!61 &3133794877809159760
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -174,21 +191,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &9018019145455780133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511158967935274362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f350ce5c7de28ea47b334e55d3750cb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 2
-  _obstacleDetector: {fileID: 2123668924872367590}
-  _platformEndDetector: {fileID: 4285097174697915246}
 --- !u!1 &1890581492853461575
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,7 +250,7 @@ GameObject:
   - component: {fileID: 611898210599572805}
   - component: {fileID: 7353144862947500106}
   - component: {fileID: 3864242798779621963}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Attacker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,3 +465,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb87f8374766a142aad89e124cd43db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8961590355515053093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7667060883796680135}
+  - component: {fileID: 1335248487995659429}
+  m_Layer: 7
+  m_Name: TargetDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7667060883796680135
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8961590355515053093}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.684, y: 0.989, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6146241442967508487}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1335248487995659429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8961590355515053093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799d75a18a70be043ab3ec3150f44ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _boxSize: {x: -1.1, y: 1.8}

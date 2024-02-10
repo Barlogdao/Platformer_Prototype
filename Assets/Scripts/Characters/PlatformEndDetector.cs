@@ -7,7 +7,7 @@ public class PlatformEndDetector : MonoBehaviour
 
     private RaycastHit2D[] _hits = new RaycastHit2D[1];
 
-    public bool IsDetected => Physics2D.RaycastNonAlloc(transform.position, -transform.up, _hits, _detectDistance) == 0;
+    public bool IsDetected => Physics2D.RaycastNonAlloc(transform.position, -transform.up, _hits, _detectDistance,_platformMask) == 0;
 
     private void OnDrawGizmosSelected()
     {

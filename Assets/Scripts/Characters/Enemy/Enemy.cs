@@ -1,6 +1,5 @@
 using EnemyStates;
 using System;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamagable
@@ -20,6 +19,7 @@ public class Enemy : MonoBehaviour, IDamagable
     private void Awake()
     {
         _health = new Health(8);
+
         _view.Initialize();
         _mover.Initialize();
         _attacker.Initialize(4);
@@ -51,6 +51,5 @@ public class Enemy : MonoBehaviour, IDamagable
     public void TakeDamage(int damage)
     {
         _health.Subtract(damage);
-        Debug.Log(damage);
     }
 }

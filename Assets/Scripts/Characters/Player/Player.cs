@@ -51,14 +51,14 @@ public class Player : MonoBehaviour, IInteractor
 
     private void OnDisable()
     {
-        _input.Disable();
         _input.Player.Interact.performed -= OnInteractPressed;
         _picker.Picked -= OnPick;
+        _input.Disable();
     }
 
     private void StateMachineInit()
     {
-        PlayerComponents playerComponents = new PlayerComponents(_view, _mover, _input, _groundDetector,_animatorEvents, _health);
+        PlayerComponents playerComponents = new PlayerComponents(_view, _mover, _input, _groundDetector, _animatorEvents, _health);
         _stateMachine = new StateMachine();
 
         _stateMachine.AddState(new IdlingState(_stateMachine, playerComponents));

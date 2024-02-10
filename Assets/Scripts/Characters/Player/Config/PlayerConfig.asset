@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
   _startMoney: 0
-  _health: 10
+  _health: 30
   _damage: 5

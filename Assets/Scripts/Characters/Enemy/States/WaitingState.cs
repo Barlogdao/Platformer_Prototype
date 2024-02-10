@@ -23,6 +23,7 @@ namespace EnemyStates
 
             _elapsedTime = 0f;
             _view.StartIdle();
+            Mover.StopMove();
         }
 
         public override void Update()

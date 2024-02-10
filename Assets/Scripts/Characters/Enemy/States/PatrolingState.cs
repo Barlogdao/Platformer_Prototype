@@ -29,6 +29,10 @@ namespace EnemyStates
             {
                 _stateSwitcher.SwitchState<WaitingState>();
             }
+            else if(_mover.IsTargetInRadius == true)
+            {
+                _stateSwitcher.SwitchState<EnemyAttackState>();
+            }
 
         }
 

@@ -6,11 +6,13 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private ObstacleDetector _obstacleDetector;
     [SerializeField] private PlatformEndDetector _platformEndDetector;
+    [SerializeField] private ObstacleDetector _targetDetector;
 
     private Rigidbody2D _rigidbody2D;
     private Vector2 _direction;
 
     public bool IsNeedChangeDirection => ObstacleDetected || PlatformEndDetected;
+    public bool IsTargetInRadius => _targetDetector.IsDetected;
     private bool ObstacleDetected => _obstacleDetector.IsDetected;
     private bool PlatformEndDetected => _platformEndDetector.IsDetected;
 
@@ -22,9 +24,14 @@ public class EnemyMover : MonoBehaviour
 
     public void Move()
     {
-        Vector3 translation = _speed * Time.deltaTime * _direction;
+        Vector2 velocity = _speed * _direction;
 
-        _rigidbody2D.MovePosition(transform.position + translation);
+        _rigidbody2D.velocity = velocity;
+    }
+
+    public void StopMove()
+    {
+        _rigidbody2D.velocity = Vector2.zero;
     }
 
     public void ChangeDirection()
