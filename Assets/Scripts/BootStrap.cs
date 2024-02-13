@@ -6,14 +6,15 @@ public class BootStrap : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private PlayerConfig _playerConfig;
-
     [Space(30)]
-    [SerializeField] private List<Chest> _chests;
-    [SerializeField] private List<Transform> _coinPoints;
-
+    [SerializeField] private Enemy[] _enemies;
+    [SerializeField] private EnemyConfig _enemyConfig;
     [Space(30)]
     [SerializeField] private Coin _coinPrefab;
     [SerializeField] private Transform _coinContainer;
+    [SerializeField] private List<Transform> _coinPoints;
+    [Space(30)]
+    [SerializeField] private List<Chest> _chests;
 
     private CoinPull _coinPull;
 
@@ -21,10 +22,19 @@ public class BootStrap : MonoBehaviour
     {
         _player.Initialize(_playerConfig);
 
-        _coinPull = new CoinPull(_coinPrefab, _coinContainer);
+        InitEnemies();
 
+        _coinPull = new CoinPull(_coinPrefab, _coinContainer);
         InitCoins();
         InitChests();
+    }
+
+    private void InitEnemies()
+    {
+        foreach (Enemy enemy in _enemies)
+        {
+            enemy.Initialize(_enemyConfig);
+        }
     }
 
     private void InitCoins()
@@ -41,5 +51,11 @@ public class BootStrap : MonoBehaviour
         {
             chest.Initialize(_coinPull);
         }
+    }
+
+    [ContextMenu("Update Enemy List")]
+    private void UpdateEnemies()
+    {
+        _enemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
     }
 }

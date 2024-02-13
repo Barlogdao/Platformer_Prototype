@@ -17,8 +17,13 @@ namespace PlayerState
             _view.StartDeath();
         }
 
-        public void Exit() { }
-        public void FixedUpdate() { }
-        public void Update() { }
+        public void Exit()
+        { }
+
+        public void FixedUpdate()
+        { }
+
+        public void Update()
+        { }
     }
 }

@@ -1,13 +1,12 @@
 namespace EnemyStates
 {
-    public class EnemyDeadState : IState
+    public class DeadState : IState
     {
         private readonly EnemyView _view;
-        private readonly PlayerMover _mover;
 
-        public EnemyDeadState(EnemyView view)
+        public DeadState(IStateSwitcher stateSwitcher, Enemy.Components components)
         {
-            _view = view;
+            _view = components.View;
         }
 
         public void Enter()
@@ -16,7 +15,9 @@ namespace EnemyStates
         }
 
         public void Exit() { }
+
         public void FixedUpdate() { }
+
         public void Update() { }
     }
 }

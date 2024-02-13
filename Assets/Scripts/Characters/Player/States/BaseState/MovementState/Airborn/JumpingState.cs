@@ -4,9 +4,9 @@ namespace PlayerState
     {
         private readonly PlayerView _view;
 
-        public JumpingState(IStateSwitcher stateSwitcher, PlayerComponents playerComponents) : base(stateSwitcher, playerComponents)
+        public JumpingState(IStateSwitcher stateSwitcher, Player.Components components) : base(stateSwitcher, components)
         {
-            _view = playerComponents.View;
+            _view = components.View;
         }
 
         public override void Enter()

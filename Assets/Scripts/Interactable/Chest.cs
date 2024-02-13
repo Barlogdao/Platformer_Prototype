@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent (typeof(Animator))]
+[RequireComponent(typeof(Animator))]
 public class Chest : Interactable
 {
     private const string OpenChest = nameof(OpenChest);
@@ -9,7 +9,7 @@ public class Chest : Interactable
     [SerializeField] private int _coinAmount;
     [SerializeField] private float _spawnCooldown;
     [SerializeField, Min(1)] private float _verticalSpawnForce;
-    [SerializeField] ParticleSystem _particles;
+    [SerializeField] private ParticleSystem _particles;
 
     private Animator _animator;
     private CoinPull _coinPull;
@@ -47,7 +47,7 @@ public class Chest : Interactable
 
     private IEnumerator SpawnCoins()
     {
-        WaitForSeconds spawnCooldown = new WaitForSeconds (_spawnCooldown);
+        WaitForSeconds spawnCooldown = new WaitForSeconds(_spawnCooldown);
 
         for (int i = 0; i < _coinAmount; i++)
         {

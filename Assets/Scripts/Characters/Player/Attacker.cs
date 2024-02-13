@@ -1,28 +1,42 @@
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
+
 public class Attacker : MonoBehaviour
 {
     [SerializeField] private LayerMask _targetLayer;
+    [SerializeField] private Vector2 _hitAreaSize;
+    [SerializeField] private Color _areaColor = Color.red;
 
+    private readonly float _hitAreaAngle = 0f;
+
+    private  float _pushForce;
     private int _damage;
-    private BoxCollider2D _boxCollider;
 
-    public void Initialize(int attackDamage)
+    public bool HasTargetInArea => Physics2D.OverlapBox(transform.position, _hitAreaSize, _hitAreaAngle, _targetLayer) != null;
+
+    public void Initialize(int attackDamage, float pushForce)
     {
-        _boxCollider = GetComponent<BoxCollider2D>();
-        _boxCollider.includeLayers = _targetLayer;
         _damage = attackDamage;
+        _pushForce = pushForce;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Hit()
     {
-        if (collision.TryGetComponent<IDamagable>(out IDamagable target))
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, _hitAreaSize, _hitAreaAngle, _targetLayer);
+
+        foreach (var collider in colliders)
         {
-            if (target.IsAlive)
+            if (collider.TryGetComponent<IDamagable>(out IDamagable target) && target.IsAlive)
             {
                 target.TakeDamage(_damage);
+                collider.attachedRigidbody.AddForce(transform.right * _pushForce, ForceMode2D.Impulse);
             }
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = _areaColor;
+        Gizmos.DrawWireCube(transform.position, _hitAreaSize);
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerAnimatorEvents : MonoBehaviour
 {
     public event Action AttackEnded;
+    public event Action AttackHits;
     public event Action HitEnded;
 
     public void OnHitEnded()
@@ -14,5 +15,10 @@ public class PlayerAnimatorEvents : MonoBehaviour
     public void OnAttackEnded()
     {
         AttackEnded?.Invoke();
+    }
+
+    public void OnAttackHits()
+    {
+        AttackHits?.Invoke();
     }
 }

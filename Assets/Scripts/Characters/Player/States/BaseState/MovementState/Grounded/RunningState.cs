@@ -2,7 +2,9 @@ namespace PlayerState
 {
     public class RunningState : GroundedState
     {
-        public RunningState(IStateSwitcher stateSwitcher, PlayerComponents playerComponents) : base(stateSwitcher, playerComponents) { }
+        public RunningState(IStateSwitcher stateSwitcher, Player.Components components) : base(stateSwitcher, components)
+        {
+        }
 
         public override void Enter()
         {

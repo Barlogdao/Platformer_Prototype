@@ -5,10 +5,10 @@ namespace PlayerState
         private readonly ObstacleDetector _groundDetector;
         private readonly PlayerView _view;
 
-        public FallingState(IStateSwitcher stateSwitcher, PlayerComponents playerComponents) : base(stateSwitcher, playerComponents)
+        public FallingState(IStateSwitcher stateSwitcher, Player.Components components) : base(stateSwitcher, components)
         {
-            _view = playerComponents.View;
-            _groundDetector = playerComponents.GroundDetector;
+            _view = components.View;
+            _groundDetector = components.GroundDetector;
         }
 
         public override void Enter()

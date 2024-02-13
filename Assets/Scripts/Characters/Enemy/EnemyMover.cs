@@ -3,23 +3,22 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyMover : MonoBehaviour
 {
-    [SerializeField] private float _speed;
     [SerializeField] private ObstacleDetector _obstacleDetector;
     [SerializeField] private PlatformEndDetector _platformEndDetector;
-    [SerializeField] private ObstacleDetector _targetDetector;
 
+    private float _speed;
     private Rigidbody2D _rigidbody2D;
     private Vector2 _direction;
 
     public bool IsNeedChangeDirection => ObstacleDetected || PlatformEndDetected;
-    public bool IsTargetInRadius => _targetDetector.IsDetected;
     private bool ObstacleDetected => _obstacleDetector.IsDetected;
     private bool PlatformEndDetected => _platformEndDetector.IsDetected;
 
-    public void Initialize()
+    public void Initialize(float speed)
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _direction = transform.right;
+        _speed = speed;
     }
 
     public void Move()
@@ -29,6 +28,12 @@ public class EnemyMover : MonoBehaviour
         _rigidbody2D.velocity = velocity;
     }
 
+    public void MoveTo(Transform target)
+    {
+        ChangeDirection(target);
+        Move();
+    }
+
     public void StopMove()
     {
         _rigidbody2D.velocity = Vector2.zero;
@@ -36,9 +41,28 @@ public class EnemyMover : MonoBehaviour
 
     public void ChangeDirection()
     {
-        Vector2 scale = new Vector2(-transform.localScale.x, transform.localScale.y);
-
-        transform.localScale = scale;
         _direction = -_direction;
+
+        CheckDirection();
     }
+
+    public void ChangeDirection(Transform target)
+    {
+        float horizontalDirection = Mathf.Sign(target.position.x - transform.position.x);
+        _direction = new Vector2(horizontalDirection, 0);
+
+        CheckDirection();
+    }
+
+    private void CheckDirection()
+    {
+        if (_direction.x < 0)
+            TurnLeft();
+        else if (_direction.x > 0)
+            TurnRight();
+    }
+
+    private void TurnLeft() => transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+
+    private void TurnRight() => transform.rotation = Quaternion.identity;
 }

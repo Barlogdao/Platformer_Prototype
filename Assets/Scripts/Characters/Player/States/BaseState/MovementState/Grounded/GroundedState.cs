@@ -2,23 +2,23 @@ using UnityEngine.InputSystem;
 
 namespace PlayerState
 {
-    public class GroundedState : MovementState
+    public abstract class GroundedState : MovementState
     {
-        public GroundedState(IStateSwitcher stateSwitcher, PlayerComponents playerComponents) : base(stateSwitcher, playerComponents) { }
+        protected GroundedState(IStateSwitcher stateSwitcher, Player.Components components) : base(stateSwitcher, components)
+        {
+        }
 
         public override void Enter()
         {
             base.Enter();
 
             Input.Player.Jump.performed += OnJumpPressed;
-            Input.Player.Attack.performed += OnAttackPressed;
         }
 
         public override void Exit()
         {
             base.Exit();
             Input.Player.Jump.performed -= OnJumpPressed;
-            Input.Player.Attack.performed -= OnAttackPressed;
         }
 
         public override void Update()
@@ -34,11 +34,6 @@ namespace PlayerState
         private void OnJumpPressed(InputAction.CallbackContext context)
         {
             StateSwitcher.SwitchState<JumpingState>();
-        }
-
-        private void OnAttackPressed(InputAction.CallbackContext context)
-        {
-            StateSwitcher.SwitchState<AttackState>();
         }
     }
 }

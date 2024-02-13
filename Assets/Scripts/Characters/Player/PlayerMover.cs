@@ -3,16 +3,18 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMover : MonoBehaviour
 {
-    [SerializeField] private float _speed = 2f;
-    [SerializeField] private float _jumpForce = 2f;
+    private float _speed;
+    private float _jumpForce;
 
     private Rigidbody2D _rigidbody2D;
 
     public float VerticalVelocity => _rigidbody2D.velocity.y;
 
-    public void Initialize()
+    public void Initialize(float speed, float jumpForce)
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _speed = speed;
+        _jumpForce = jumpForce;
     }
 
     public void Jump()

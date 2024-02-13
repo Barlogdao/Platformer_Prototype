@@ -2,7 +2,7 @@ using Controls.Input;
 
 namespace PlayerState
 {
-    public class BaseState : IState
+    public abstract class PlayerBaseState : IState
     {
         protected readonly IStateSwitcher StateSwitcher;
         protected readonly GameInput Input;
@@ -10,30 +10,32 @@ namespace PlayerState
         protected readonly IDamagable Damagable;
 
         private readonly ObstacleDetector _groundDetector;
-        protected BaseState(IStateSwitcher stateSwitcher, PlayerComponents playerComponents)
+
+        protected PlayerBaseState(IStateSwitcher stateSwitcher, Player.Components components)
         {
             StateSwitcher = stateSwitcher;
-            Input = playerComponents.Input;
-            View = playerComponents.View;
-            Damagable = playerComponents.Damagable;
-            _groundDetector = playerComponents.GroundDetector;
+            Input = components.Input;
+            View = components.View;
+            Damagable = components.Damagable;
+            _groundDetector = components.GroundDetector;
         }
 
         protected float HorizontalInput { get; private set; }
         protected bool IsHorizontInputZero => HorizontalInput == 0;
         protected bool IsGrounded => _groundDetector.IsDetected;
 
-        public virtual void Enter() 
+        public virtual void Enter()
         {
             Damagable.Hitted += OnHitted;
         }
 
-        public virtual void Exit() 
+        public virtual void Exit()
         {
             Damagable.Hitted -= OnHitted;
         }
 
-        public virtual void FixedUpdate() { }
+        public virtual void FixedUpdate()
+        { }
 
         public virtual void Update()
         {
@@ -45,6 +47,7 @@ namespace PlayerState
 
             HorizontalInput = Input.Player.Move.ReadValue<float>();
         }
+
         private void OnHitted()
         {
             StateSwitcher.SwitchState<HitState>();

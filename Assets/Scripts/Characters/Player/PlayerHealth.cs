@@ -13,6 +13,12 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     }
 
     public bool IsAlive => _health.IsPositive;
+    public int Value => _health.CurrentValue;
+
+    public void Heal(int value)
+    {
+        _health.Add(value);
+    }
 
     public void TakeDamage(int damage)
     {

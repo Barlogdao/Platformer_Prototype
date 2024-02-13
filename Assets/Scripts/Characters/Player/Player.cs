@@ -26,9 +26,10 @@ public class Player : MonoBehaviour, IInteractor
         _wallet = new Wallet(config.StartMoney);
 
         _view.Initialize();
-        _mover.Initialize();
+        _mover.Initialize(config.Speed,config.JumpForce);
         _health.Initialize(config.Health);
-        _attacker.Initialize(config.Damage);
+        _attacker.Initialize(config.Damage, config.PushForce);
+
         StateMachineInit();
     }
 
@@ -58,16 +59,17 @@ public class Player : MonoBehaviour, IInteractor
 
     private void StateMachineInit()
     {
-        PlayerComponents playerComponents = new PlayerComponents(_view, _mover, _input, _groundDetector, _animatorEvents, _health);
+        Components components = new Components(_view, _mover, _input, _groundDetector, _animatorEvents, _health, _attacker);
         _stateMachine = new StateMachine();
 
-        _stateMachine.AddState(new IdlingState(_stateMachine, playerComponents));
-        _stateMachine.AddState(new RunningState(_stateMachine, playerComponents));
-        _stateMachine.AddState(new JumpingState(_stateMachine, playerComponents));
-        _stateMachine.AddState(new FallingState(_stateMachine, playerComponents));
-        _stateMachine.AddState(new AttackState(_stateMachine, playerComponents));
-        _stateMachine.AddState(new HitState(_stateMachine, playerComponents));
-        _stateMachine.AddState(new ReturnState(_stateMachine, playerComponents));
+        _stateMachine.AddState(new IdlingState(_stateMachine, components));
+        _stateMachine.AddState(new RunningState(_stateMachine, components));
+        _stateMachine.AddState(new JumpingState(_stateMachine, components));
+        _stateMachine.AddState(new FallingState(_stateMachine, components));
+        _stateMachine.AddState(new AttackState(_stateMachine, components));
+        _stateMachine.AddState(new AirAttackState(_stateMachine, components));
+        _stateMachine.AddState(new HitState(_stateMachine, components));
+        _stateMachine.AddState(new ReturnState(_stateMachine, components));
         _stateMachine.AddState(new DeadState(_view, _mover));
 
         _stateMachine.SwitchState<IdlingState>();
@@ -79,10 +81,38 @@ public class Player : MonoBehaviour, IInteractor
         {
             _wallet.AddMoney(coin.Value);
         }
+        else if (pickable is HealthKit healthKit)
+        {
+            _health.Heal(healthKit.Value);
+            Debug.Log(_health.Value);
+        }
     }
 
     private void OnInteractPressed(InputAction.CallbackContext context)
     {
         Interacted?.Invoke();
+    }
+
+    public class Components
+    {
+        public Components(PlayerView view, PlayerMover mover, GameInput input, ObstacleDetector groundDetector, PlayerAnimatorEvents animatorEvents, IDamagable damagable, Attacker attacker)
+        {
+            View = view;
+            Mover = mover;
+            Input = input;
+            GroundDetector = groundDetector;
+            AnimatorEvents = animatorEvents;
+            Damagable = damagable;
+            Attacker = attacker;
+        }
+
+        public PlayerView View { get; }
+        public PlayerMover Mover { get; }
+        public GameInput Input { get; }
+        public ObstacleDetector GroundDetector { get; }
+        public PlayerAnimatorEvents AnimatorEvents { get; }
+        public Attacker Attacker { get; }
+
+        public IDamagable Damagable { get; }
     }
 }

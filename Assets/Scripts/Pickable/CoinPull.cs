@@ -4,7 +4,7 @@ using UnityEngine.Pool;
 public class CoinPull
 {
     private readonly ObjectPool<Coin> _pull;
-    
+
     private readonly Coin _prefab;
     private readonly int _defaultCapacity;
     private readonly Transform _parent;

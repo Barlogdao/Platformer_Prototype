@@ -15,3 +15,6 @@ MonoBehaviour:
   _startMoney: 0
   _health: 30
   _damage: 5
+  _speed: 6
+  _jumpForce: 6
+  _pushForce: 3.5

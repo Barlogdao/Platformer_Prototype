@@ -1,11 +1,14 @@
 namespace PlayerState
 {
-    public class HitState : BaseState
+    public class HitState : PlayerBaseState
     {
         private readonly PlayerAnimatorEvents _animatorEvents;
-        public HitState(IStateSwitcher stateSwitcher, PlayerComponents playerComponents) : base(stateSwitcher, playerComponents)
+        private readonly PlayerMover _mover;
+
+        public HitState(IStateSwitcher stateSwitcher, Player.Components components) : base(stateSwitcher, components)
         {
-            _animatorEvents = playerComponents.AnimatorEvents;
+            _animatorEvents = components.AnimatorEvents;
+            _mover = components.Mover;
         }
 
         public override void Enter()
@@ -13,6 +16,7 @@ namespace PlayerState
             base.Enter();
 
             View.StartHit();
+            _mover.StopMove();
             _animatorEvents.HitEnded += OnHitEnded;
         }
 

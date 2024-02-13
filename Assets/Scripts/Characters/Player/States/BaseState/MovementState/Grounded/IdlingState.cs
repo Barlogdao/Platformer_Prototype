@@ -2,7 +2,9 @@ namespace PlayerState
 {
     public class IdlingState : GroundedState
     {
-        public IdlingState(IStateSwitcher stateSwitcher, PlayerComponents playerComponents) : base(stateSwitcher, playerComponents) { }
+        public IdlingState(IStateSwitcher stateSwitcher, Player.Components components) : base(stateSwitcher, components)
+        {
+        }
 
         public override void Enter()
         {

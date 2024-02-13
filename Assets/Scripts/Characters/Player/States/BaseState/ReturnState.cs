@@ -1,8 +1,10 @@
 namespace PlayerState
 {
-    public class ReturnState : BaseState
+    public class ReturnState : PlayerBaseState
     {
-        public ReturnState(IStateSwitcher stateSwitcher, PlayerComponents playerComponents) : base(stateSwitcher, playerComponents) { }
+        public ReturnState(IStateSwitcher stateSwitcher, Player.Components components) : base(stateSwitcher, components)
+        {
+        }
 
         public override void Enter()
         {
