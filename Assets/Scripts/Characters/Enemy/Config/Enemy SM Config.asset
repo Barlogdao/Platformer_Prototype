@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f36749da1588b048bad9d828e2fbf59, type: 3}
-  m_Name: EnemyConfig 1
+  m_Name: Enemy SM Config
   m_EditorClassIdentifier: 
-  _chaseDistance: 6
-  _waitDuration: 1
+  _chaseDistance: 7
+  _waitDuration: 0.4

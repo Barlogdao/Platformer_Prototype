@@ -136,7 +136,7 @@ namespace Controls.Input
                 {
                     ""name"": """",
                     ""id"": ""b9939048-c52f-4ab8-9e12-f4dce1710841"",
-                    ""path"": ""<Keyboard>/upArrow"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -169,7 +169,7 @@ namespace Controls.Input
                 {
                     ""name"": """",
                     ""id"": ""e3999afe-f0a4-490b-a69f-aeaf5385eb44"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",

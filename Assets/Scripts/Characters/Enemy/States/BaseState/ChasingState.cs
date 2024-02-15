@@ -45,7 +45,7 @@ namespace EnemyStates
             {
                 StateSwitcher.SwitchState<AttackState>();
             }
-            else if (Mover.IsNeedChangeDirection == true || CanChaseTarget() == false)
+            else if (Mover.IsObstacleDetected == true || CanChaseTarget() == false)
             {
                 StateSwitcher.SwitchState<WaitingState>();
             }

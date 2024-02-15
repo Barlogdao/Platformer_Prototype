@@ -10,9 +10,9 @@ public class EnemyMover : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private Vector2 _direction;
 
-    public bool IsNeedChangeDirection => ObstacleDetected || PlatformEndDetected;
-    private bool ObstacleDetected => _obstacleDetector.IsDetected;
-    private bool PlatformEndDetected => _platformEndDetector.IsDetected;
+    public bool IsNeedChangeDirection => IsObstacleDetected || IsPlatformEndDetected;
+    public bool IsObstacleDetected => _obstacleDetector.IsDetected;
+    public bool IsPlatformEndDetected => _platformEndDetector.IsDetected;
 
     public void Initialize(float speed)
     {
@@ -24,6 +24,7 @@ public class EnemyMover : MonoBehaviour
     public void Move()
     {
         Vector2 velocity = _speed * _direction;
+        velocity.y = _rigidbody2D.velocity.y;
 
         _rigidbody2D.velocity = velocity;
     }

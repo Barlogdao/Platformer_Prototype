@@ -22,28 +22,28 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 8573547025987278109, guid: a652c8f313b58ec4a904f05ea2251d33, type: 3}
-    - time: 0.11099994
+    - time: 0.09166667
       value: {fileID: 7790074254292647044, guid: a652c8f313b58ec4a904f05ea2251d33, type: 3}
-    - time: 0.222
+    - time: 0.18333334
       value: {fileID: -2756379480092761972, guid: a652c8f313b58ec4a904f05ea2251d33, type: 3}
-    - time: 0.33299994
+    - time: 0.275
       value: {fileID: 8637068721030317720, guid: a652c8f313b58ec4a904f05ea2251d33, type: 3}
-    - time: 0.444
+    - time: 0.36666667
       value: {fileID: 5049502285583999951, guid: a652c8f313b58ec4a904f05ea2251d33, type: 3}
-    - time: 0.55500007
+    - time: 0.46666667
       value: {fileID: -8216358894794951152, guid: a652c8f313b58ec4a904f05ea2251d33, type: 3}
-    - time: 0.6659999
+    - time: 0.55833334
       value: {fileID: -4485136211568127869, guid: a652c8f313b58ec4a904f05ea2251d33, type: 3}
-    - time: 0.77699995
+    - time: 0.65
       value: {fileID: 8475182160514739315, guid: a652c8f313b58ec4a904f05ea2251d33, type: 3}
-    - time: 0.88799995
+    - time: 0.7416667
       value: {fileID: 8475182160514739315, guid: a652c8f313b58ec4a904f05ea2251d33, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 100
+  m_SampleRate: 120
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -74,7 +74,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.9
+    m_StopTime: 0.75
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -94,14 +94,14 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.34
+  - time: 0.28333333
     functionName: OnAttackHits
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.9
+  - time: 0.75
     functionName: OnAttackEnded
     data: 
     objectReferenceParameter: {fileID: 0}
