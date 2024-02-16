@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8069d309c285b942a44640b5426512f, type: 3}
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  _startMoney: 0
-  _health: 20
-  _damage: 5
-  _speed: 4.5
-  _jumpForce: 5
-  _pushForce: 3.5
+  <StartMoney>k__BackingField: 0
+  <Health>k__BackingField: 20
+  <Damage>k__BackingField: 5
+  <Speed>k__BackingField: 4.5
+  <JumpForce>k__BackingField: 5
+  <PushForce>k__BackingField: 3.5

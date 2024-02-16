@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc8a7cde05e70f449ba16bb633c553d, type: 3}
   m_Name: EnemyConfig
   m_EditorClassIdentifier: 
-  _health: 15
-  _damage: 5
-  _speed: 3
-  _pushForce: 2
-  _stateMachineConfig: {fileID: 11400000, guid: 9b233fffdb192f740b3732882600d982, type: 2}
+  <Health>k__BackingField: 15
+  <Damage>k__BackingField: 5
+  <Speed>k__BackingField: 4
+  <PushForce>k__BackingField: 2
+  <StateMachineConfig>k__BackingField: {fileID: 11400000, guid: 9b233fffdb192f740b3732882600d982, type: 2}

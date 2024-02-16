@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chaseDistance: 7
   _waitDuration: 0.4
+  <ChaseDistance>k__BackingField: 7
+  <WaitDuration>k__BackingField: 0.4
