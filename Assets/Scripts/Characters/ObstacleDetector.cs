@@ -8,9 +8,9 @@ public class ObstacleDetector : MonoBehaviour
 
     private readonly float _boxAngle = 0f;
 
-    public bool IsDetected => Physics2D.OverlapBox(transform.position, _boxSize, _boxAngle, _obstacleMask) != null;
+    public bool IsDetected() => Physics2D.OverlapBox(transform.position, _boxSize, _boxAngle, _obstacleMask) != null;
 
-    protected Collider2D GetObstacle => Physics2D.OverlapBox(transform.position, _boxSize, _boxAngle, _obstacleMask);
+    protected Collider2D GetObstacle() => Physics2D.OverlapBox(transform.position, _boxSize, _boxAngle, _obstacleMask);
 
     private void OnDrawGizmosSelected()
     {

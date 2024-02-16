@@ -41,7 +41,7 @@ namespace EnemyStates
             {
                 StateSwitcher.SwitchState<AttackState>();
             }
-            else if (TargetDetector.IsDetected)
+            else if (TargetDetector.IsDetected())
             {
                 StateSwitcher.SwitchState<ChasingState>();
             }

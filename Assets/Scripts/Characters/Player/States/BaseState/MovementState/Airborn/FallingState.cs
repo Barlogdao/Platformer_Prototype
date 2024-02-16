@@ -22,7 +22,7 @@ namespace PlayerState
         {
             base.Update();
 
-            if (_groundDetector.IsDetected)
+            if (_groundDetector.IsDetected())
             {
                 if (IsHorizontInputZero == true)
                     StateSwitcher.SwitchState<IdlingState>();

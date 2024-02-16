@@ -8,9 +8,9 @@ public class PlatformEndDetector : MonoBehaviour
 
     private readonly float _boxAngle = 0f;
 
-    public bool IsDetected => Physics2D.OverlapBox(transform.position, _boxSize, _boxAngle, _platformMask) == null;
+    public bool IsDetected() => Physics2D.OverlapBox(transform.position, _boxSize, _boxAngle, _platformMask) == null;
 
-      private void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = _color;
         Gizmos.DrawWireCube(transform.position, _boxSize);

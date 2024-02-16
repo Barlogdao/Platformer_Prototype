@@ -11,8 +11,8 @@ public class EnemyMover : MonoBehaviour
     private Vector2 _direction;
 
     public bool IsNeedChangeDirection => IsObstacleDetected || IsPlatformEndDetected;
-    public bool IsObstacleDetected => _obstacleDetector.IsDetected;
-    public bool IsPlatformEndDetected => _platformEndDetector.IsDetected;
+    public bool IsObstacleDetected => _obstacleDetector.IsDetected();
+    public bool IsPlatformEndDetected => _platformEndDetector.IsDetected();
 
     public void Initialize(float speed)
     {

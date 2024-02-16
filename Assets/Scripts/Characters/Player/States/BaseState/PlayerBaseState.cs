@@ -22,7 +22,7 @@ namespace PlayerState
 
         protected float HorizontalInput { get; private set; }
         protected bool IsHorizontInputZero => HorizontalInput == 0;
-        protected bool IsGrounded => _groundDetector.IsDetected;
+        protected bool IsGrounded => _groundDetector.IsDetected();
 
         public virtual void Enter()
         {

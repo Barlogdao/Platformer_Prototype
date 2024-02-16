@@ -4,7 +4,7 @@ public class TargetDetector : ObstacleDetector
 {
     public bool TryGetTarget(out Transform target)
     {
-        Collider2D obstacle = GetObstacle;
+        Collider2D obstacle = GetObstacle();
         target = null;
 
         if (obstacle != null)
