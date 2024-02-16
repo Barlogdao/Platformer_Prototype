@@ -2,13 +2,15 @@ using System;
 
 public class Health
 {
+    private readonly int _maxValue;
+
     public Health(int maxValue)
     {
-        MaxValue = maxValue;
-        CurrentValue = MaxValue;
+        _maxValue = maxValue;
+        CurrentValue = _maxValue;
     }
 
-    public int MaxValue { get; }
+    public int MaxValue => _maxValue;
     public int CurrentValue { get; private set; }
     public bool IsPositive => CurrentValue > 0;
 
@@ -34,6 +36,6 @@ public class Health
 
     private void ClampValue()
     {
-        CurrentValue = Math.Clamp(CurrentValue, 0, MaxValue);
+        CurrentValue = Math.Clamp(CurrentValue, 0, _maxValue);
     }
 }
