@@ -61,6 +61,6 @@ public class Chest : Interactable
 
     private Vector2 GetCoinVelocity()
     {
-        return new Vector2(Random.value, 1f * _verticalSpawnForce);
+        return new Vector2(Random.value, _verticalSpawnForce);
     }
 }
