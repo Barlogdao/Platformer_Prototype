@@ -2,17 +2,14 @@ using System;
 
 public class Health
 {
-    private int _maxValue;
-    private int _currentValue;
-
     public Health(int maxValue)
     {
-        _maxValue = maxValue;
-        _currentValue = _maxValue;
+        MaxValue = maxValue;
+        CurrentValue = MaxValue;
     }
 
-    public int MaxValue => _maxValue;
-    public int CurrentValue => _currentValue;
+    public int MaxValue { get; }
+    public int CurrentValue { get; private set; }
     public bool IsPositive => CurrentValue > 0;
 
     public void Add(int value)
@@ -20,10 +17,9 @@ public class Health
         if (value < 0)
             throw new ArgumentOutOfRangeException($"value can not be negative: {nameof(value)} is {value}");
 
-        _currentValue += value;
+        CurrentValue += value;
 
-        if (_currentValue > _maxValue)
-            _currentValue = _maxValue;
+        ClampValue();
     }
 
     public void Subtract(int value)
@@ -31,9 +27,13 @@ public class Health
         if (value < 0)
             throw new ArgumentOutOfRangeException($"value can not be negative:{nameof(value)} is {value}");
 
-        _currentValue -= value;
+        CurrentValue -= value;
 
-        if (_currentValue < 0)
-            _currentValue = 0;
+        ClampValue();
+    }
+
+    private void ClampValue()
+    {
+        CurrentValue = Math.Clamp(CurrentValue, 0, MaxValue);
     }
 }

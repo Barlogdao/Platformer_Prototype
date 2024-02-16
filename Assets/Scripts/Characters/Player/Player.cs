@@ -84,7 +84,6 @@ public class Player : MonoBehaviour, IInteractor
         else if (pickable is HealthKit healthKit)
         {
             _health.Heal(healthKit.Value);
-            Debug.Log(_health.Value);
         }
     }
 
