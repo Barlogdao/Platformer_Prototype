@@ -10,6 +10,8 @@ public class Health
         CurrentValue = _maxValue;
     }
 
+    public event Action<int> ValueChanged;
+
     public int MaxValue => _maxValue;
     public int CurrentValue { get; private set; }
     public bool IsPositive => CurrentValue > 0;
@@ -20,8 +22,9 @@ public class Health
             throw new ArgumentOutOfRangeException($"value can not be negative: {nameof(value)} is {value}");
 
         CurrentValue += value;
-
         ClampValue();
+
+        ValueChanged?.Invoke(CurrentValue);
     }
 
     public void Subtract(int value)
@@ -30,8 +33,9 @@ public class Health
             throw new ArgumentOutOfRangeException($"value can not be negative:{nameof(value)} is {value}");
 
         CurrentValue -= value;
-
         ClampValue();
+
+        ValueChanged?.Invoke(CurrentValue);
     }
 
     private void ClampValue()

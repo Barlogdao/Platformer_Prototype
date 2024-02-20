@@ -1,8 +1,11 @@
+using RB.UI;
 using System;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IDamagable
 {
+    [SerializeField] HealthView _healthView;
+
     private Health _health;
 
     public event Action Hitted;
@@ -10,6 +13,8 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     public void Initialize(int maxHealth)
     {
         _health = new Health(maxHealth);
+
+        _healthView.Initialize(_health);
     }
 
     public bool IsAlive => _health.IsPositive;

@@ -1,4 +1,5 @@
 using EnemyStates;
+using RB.UI;
 using System;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class Enemy : MonoBehaviour, IDamagable
     [SerializeField] private Attacker _attacker;
     [SerializeField] private EnemyAnimatorEvents _animatorEvents;
     [SerializeField] private TargetDetector _targetDetector;
+    [SerializeField] private HealthView _healthView;
 
     private StateMachine _stateMachine;
     private Health _health;
@@ -20,9 +22,11 @@ public class Enemy : MonoBehaviour, IDamagable
     public void Initialize(EnemyConfig config)
     {
         _health = new Health(config.Health);
+
         _view.Initialize(this);
         _mover.Initialize(config.Speed);
         _attacker.Initialize(config.Damage, config.PushForce);
+        _healthView.Initialize(_health);
 
         StateMachineInit(config.StateMachineConfig);
     }
