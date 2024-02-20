@@ -13,12 +13,14 @@ namespace PlayerState
             base.Enter();
 
             Input.Player.Jump.performed += OnJumpPressed;
+            Input.Player.CastSpell.performed += OnCastSpellPressed;
         }
 
         public override void Exit()
         {
             base.Exit();
             Input.Player.Jump.performed -= OnJumpPressed;
+            Input.Player.CastSpell.performed -= OnCastSpellPressed;
         }
 
         public override void Update()
@@ -34,6 +36,11 @@ namespace PlayerState
         private void OnJumpPressed(InputAction.CallbackContext context)
         {
             StateSwitcher.SwitchState<JumpingState>();
+        }
+
+        private void OnCastSpellPressed(InputAction.CallbackContext obj)
+        {
+            StateSwitcher.SwitchState<CastSpellState>();
         }
     }
 }

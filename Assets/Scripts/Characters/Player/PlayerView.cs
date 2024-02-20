@@ -13,6 +13,7 @@ public class PlayerView : MonoBehaviour
     private static readonly int s_hit = Animator.StringToHash("Hit");
     private static readonly int s_death = Animator.StringToHash("Death");
     private static readonly int s_airAttack = Animator.StringToHash("AirAttack");
+    private static readonly int s_castSpell = Animator.StringToHash("CastSpell");
 
     private Animator _animator;
 
@@ -36,4 +37,6 @@ public class PlayerView : MonoBehaviour
     public void StartAirAttack() => _animator.Play(s_airAttack);
 
     public void StartHit() => _animator.Play(s_hit);
+
+    public void StartCastSpell() => _animator.Play(s_castSpell);
 }

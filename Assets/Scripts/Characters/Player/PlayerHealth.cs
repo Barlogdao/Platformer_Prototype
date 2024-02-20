@@ -2,7 +2,7 @@ using RB.UI;
 using System;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour, IDamagable
+public class PlayerHealth : MonoBehaviour, IDamagable, IHealable
 {
     [SerializeField] HealthView _healthView;
 

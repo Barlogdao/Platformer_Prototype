@@ -13,6 +13,7 @@ public class Player : MonoBehaviour, IInteractor
     [SerializeField] private Attacker _attacker;
     [SerializeField] private ObstacleDetector _groundDetector;
     [SerializeField] private PlayerPicker _picker;
+    [SerializeField] private Spell _spell;
 
     private GameInput _input;
     private StateMachine _stateMachine;
@@ -26,7 +27,7 @@ public class Player : MonoBehaviour, IInteractor
         _wallet = new Wallet(config.StartMoney);
 
         _view.Initialize();
-        _mover.Initialize(config.Speed,config.JumpForce);
+        _mover.Initialize(config.Speed, config.JumpForce);
         _health.Initialize(config.Health);
         _attacker.Initialize(config.Damage, config.PushForce);
 
@@ -59,7 +60,7 @@ public class Player : MonoBehaviour, IInteractor
 
     private void StateMachineInit()
     {
-        Components components = new Components(_view, _mover, _input, _groundDetector, _animatorEvents, _health, _attacker);
+        Components components = new Components(_view, _mover, _input, _groundDetector, _animatorEvents, _health, _attacker, _spell);
         _stateMachine = new StateMachine();
 
         _stateMachine.AddState(new IdlingState(_stateMachine, components));
@@ -71,6 +72,7 @@ public class Player : MonoBehaviour, IInteractor
         _stateMachine.AddState(new HitState(_stateMachine, components));
         _stateMachine.AddState(new ReturnState(_stateMachine, components));
         _stateMachine.AddState(new DeadState(_view, _mover));
+        _stateMachine.AddState(new CastSpellState(_stateMachine, components));
 
         _stateMachine.SwitchState<IdlingState>();
     }
@@ -94,7 +96,7 @@ public class Player : MonoBehaviour, IInteractor
 
     public class Components
     {
-        public Components(PlayerView view, PlayerMover mover, GameInput input, ObstacleDetector groundDetector, PlayerAnimatorEvents animatorEvents, IDamagable damagable, Attacker attacker)
+        public Components(PlayerView view, PlayerMover mover, GameInput input, ObstacleDetector groundDetector, PlayerAnimatorEvents animatorEvents, IDamagable damagable, Attacker attacker, Spell spell)
         {
             View = view;
             Mover = mover;
@@ -103,6 +105,7 @@ public class Player : MonoBehaviour, IInteractor
             AnimatorEvents = animatorEvents;
             Damagable = damagable;
             Attacker = attacker;
+            Spell = spell;
         }
 
         public PlayerView View { get; }
@@ -111,7 +114,7 @@ public class Player : MonoBehaviour, IInteractor
         public ObstacleDetector GroundDetector { get; }
         public PlayerAnimatorEvents AnimatorEvents { get; }
         public Attacker Attacker { get; }
-
+        public Spell Spell { get; }
         public IDamagable Damagable { get; }
     }
 }
