@@ -85,7 +85,7 @@ AnimatorStateMachine:
     m_Position: {x: 460, y: 410, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6841897330198993162}
-    m_Position: {x: 538.01733, y: 615.7537, z: 0}
+    m_Position: {x: 450, y: 580, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -498,7 +498,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ability
+  m_Name: CastSpell
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
