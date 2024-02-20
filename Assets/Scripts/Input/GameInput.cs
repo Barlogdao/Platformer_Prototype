@@ -64,6 +64,15 @@ namespace Controls.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CastSpell"",
+                    ""type"": ""Button"",
+                    ""id"": ""7b07c857-e27e-4c24-a462-1ce2a6b70346"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -176,6 +185,17 @@ namespace Controls.Input
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f844bebe-c044-484c-8515-29a2341b047c"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CastSpell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -194,6 +214,7 @@ namespace Controls.Input
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
             m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+            m_Player_CastSpell = m_Player.FindAction("CastSpell", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -259,6 +280,7 @@ namespace Controls.Input
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_Interact;
         private readonly InputAction m_Player_Attack;
+        private readonly InputAction m_Player_CastSpell;
         public struct PlayerActions
         {
             private @GameInput m_Wrapper;
@@ -267,6 +289,7 @@ namespace Controls.Input
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @Interact => m_Wrapper.m_Player_Interact;
             public InputAction @Attack => m_Wrapper.m_Player_Attack;
+            public InputAction @CastSpell => m_Wrapper.m_Player_CastSpell;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -288,6 +311,9 @@ namespace Controls.Input
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @CastSpell.started += instance.OnCastSpell;
+                @CastSpell.performed += instance.OnCastSpell;
+                @CastSpell.canceled += instance.OnCastSpell;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -304,6 +330,9 @@ namespace Controls.Input
                 @Attack.started -= instance.OnAttack;
                 @Attack.performed -= instance.OnAttack;
                 @Attack.canceled -= instance.OnAttack;
+                @CastSpell.started -= instance.OnCastSpell;
+                @CastSpell.performed -= instance.OnCastSpell;
+                @CastSpell.canceled -= instance.OnCastSpell;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -336,6 +365,7 @@ namespace Controls.Input
             void OnJump(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
             void OnAttack(InputAction.CallbackContext context);
+            void OnCastSpell(InputAction.CallbackContext context);
         }
     }
 }
