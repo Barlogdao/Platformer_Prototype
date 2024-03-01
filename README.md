@@ -8,7 +8,7 @@ Implementing player and enemy movement logic
 # Attack
 Implementing health system and damage|heal sources
 
-[![Watch](https://youtu.be/-o8IhVAvE2k.maxresdefault.jpg)](https://youtu.be/-o8IhVAvE2k)
+[![Watch](https://img.youtu.be/-o8IhVAvE2k.maxresdefault.jpg)](https://youtu.be/-o8IhVAvE2k)
 
 #UI
 Implementing Main Menu
