@@ -2,7 +2,7 @@
 
 # 2D Movement
 Implementing player and enemy movement logic
-[![Movement]](https://youtu.be/8jfa7ID5XtM)
+[![Movement](https://youtu.be/8jfa7ID5XtM)](https://youtu.be/8jfa7ID5XtM)
 
 # Attack
 Implementing health system and damage|heal sources
